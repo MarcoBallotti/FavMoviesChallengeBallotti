@@ -1,4 +1,11 @@
-import {StyleSheet, Text, View, Image, ActivityIndicator} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import axiosInstance from '../utils/axios';
@@ -73,6 +80,10 @@ const MovieDetail = () => {
           <View style={styles.contentContainer}>
             <Text style={styles.description}>{movie.overview}</Text>
           </View>
+
+          <TouchableOpacity onPress={handleHeartClick}>
+            <Text>{isHeartClicked ? 'Like' : 'Unlike'}</Text>
+          </TouchableOpacity>
         </ScrollView>
       )}
     </View>

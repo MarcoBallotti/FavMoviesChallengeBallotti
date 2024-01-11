@@ -17,7 +17,7 @@ import {LikedStore, useLikedStore} from '../utils/zustand';
 const FavoritesScreen: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(false);
-  const {likedMovies} = useLikedStore((state: LikedStore) => state);
+  const {likedMovies} = useLikedStore();
 
   const getMovies = async () => {
     setLoading(true);
