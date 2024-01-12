@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
   },
   backgroundContainer: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   loading: {
     flex: 1,

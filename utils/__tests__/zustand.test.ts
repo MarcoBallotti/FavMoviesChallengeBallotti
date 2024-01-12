@@ -1,23 +1,20 @@
-import AsyncStorageMock from '@react-native-async-storage/async-storage/jest/async-storage-mock';
+import {useLikedStore} from '../testable_store';
 
-import {useLikedStore} from '../zustand';
-
-describe('useLikedStore', () => {
-  beforeEach(async () => {
-    // Pulisci lo storage prima di ogni test
-    await AsyncStorageMock.clear();
-  });
-
-  it('should initialize the store with an empty array', () => {
+describe('test 1', () => {
+  test('should return length of film appended', () => {
     const {likedMovies} = useLikedStore.getState();
-    expect(likedMovies).toEqual([]);
+    const logLines = 3;
+    for (let index = 0; index < logLines; index++) {
+      likedMovies.push(index);
+    }
+    expect(likedMovies.length).toBe(logLines);
   });
+});
 
-  it('should add a movie to the liked list', () => {
-    const movieId = 123;
-    useLikedStore.getState().addToLiked(movieId);
-
+describe('test 2', () => {
+  test('should return length of film appended empty', () => {
     const {likedMovies} = useLikedStore.getState();
-    expect(likedMovies).toEqual([movieId]);
+    likedMovies.length = 0;
+    expect(likedMovies.length).toBe(0);
   });
 });

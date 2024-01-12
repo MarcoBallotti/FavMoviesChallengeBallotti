@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "esnext" // 👈️ set to esnext
+    "module": "esnext", // 👈️ set to esnext
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
     // ... your other options
   },
   "include": ["src/**/*"],
