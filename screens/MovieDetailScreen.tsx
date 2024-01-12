@@ -25,9 +25,6 @@ const MovieDetail = () => {
   );
 
   const handleHeartClick = () => {
-    console.log('%c isHeartClicked', 'color:#FFB86C', isHeartClicked);
-    console.log('%c movie.id', 'color:#FFB86C', movie.id);
-
     setIsHeartClicked(!isHeartClicked);
     if (isHeartClicked) {
       removeFromLiked(movie.id);
@@ -46,7 +43,7 @@ const MovieDetail = () => {
           <AntDesign
             name={isHeartClicked ? 'heart' : 'hearto'}
             size={30}
-            color="red"
+            color="#007aff"
           />
         </TouchableOpacity>
       ),
