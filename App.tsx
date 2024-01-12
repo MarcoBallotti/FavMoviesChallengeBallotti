@@ -32,6 +32,7 @@ type SectionProps = PropsWithChildren<{
 
 function Section({children, title}: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
+
   return (
     <View style={styles.sectionContainer}>
       <Text
@@ -92,7 +93,9 @@ function App(): React.JSX.Element {
           <Stack.Screen
             name="MovieDetailScreen"
             component={MovieDetailScreen}
-            options={{headerShown: true}}
+            options={({navigation}) => ({
+              headerShown: true,
+            })}
           />
 
           <Stack.Screen

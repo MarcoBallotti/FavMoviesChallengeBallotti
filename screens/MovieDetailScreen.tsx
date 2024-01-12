@@ -40,7 +40,18 @@ const MovieDetail = () => {
     getMovie();
     const movieIsLiked = likedMovies.includes(movie.id);
     setIsHeartClicked(movieIsLiked);
-  }, [likedMovies, movie.id]);
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={handleHeartClick} style={{marginRight: 10}}>
+          <AntDesign
+            name={isHeartClicked ? 'heart' : 'hearto'}
+            size={30}
+            color="red"
+          />
+        </TouchableOpacity>
+      ),
+    });
+  }, [likedMovies, movie.id, navigation]);
 
   const getMovie = () => {
     setLoading(true);
