@@ -12,7 +12,7 @@ import axiosInstance from '../utils/axios';
 import {Movie} from '../models/movie';
 import {ScrollView} from 'react-native-gesture-handler';
 import {LikedStore, useLikedStore} from '../utils/zustand';
-
+import AntDesign from 'react-native-vector-icons/AntDesign';
 const MovieDetail = () => {
   const route = useRoute();
   const navigation = useNavigation();
@@ -81,7 +81,11 @@ const MovieDetail = () => {
           </View>
 
           <TouchableOpacity onPress={handleHeartClick}>
-            <Text>{isHeartClicked ? 'Unlike' : 'Like'}</Text>
+            <AntDesign
+              name={isHeartClicked ? 'heart' : 'hearto'}
+              size={30}
+              color="red"
+            />
           </TouchableOpacity>
         </ScrollView>
       )}
