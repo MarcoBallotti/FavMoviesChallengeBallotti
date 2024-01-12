@@ -1,10 +1,42 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import React, {useEffect} from 'react';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import {Movie} from '../models/movie';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {LikedStore, useLikedStore} from '../utils/zustand';
+import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+
+const MovieCard = ({movie}: {movie: Movie}) => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
+  const handleNavigation = () => {
+    navigation.navigate('MovieDetailScreen', {id: movie.id});
+  };
+
+  useEffect(() => {});
+
+  return (
+    <TouchableWithoutFeedback
+      style={styles.container}
+      onPress={handleNavigation}>
+      <Image
+        source={{uri: 'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path}}
+        style={styles.image}
+      />
+      <View style={styles.contentContainer}>
+        <Text style={styles.title}>{movie.title}</Text>
+        <Text style={styles.subTitle}>
+          Anno:
+          {movie.release_date && new Date(movie.release_date).getFullYear()} |
+          Voto:
+          {movie.vote_average && parseFloat(movie.vote_average.toFixed(1))}
+        </Text>
+      </View>
+      <View style={styles.iconContainer}>
+        <Text>{'>'}</Text>
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -47,54 +79,5 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-const MovieCard = ({movie}: {movie: Movie}) => {
-  const [isHeartClicked, setIsHeartClicked] = useState(false);
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const {addToLiked, removeFromLiked, likedMovies} = useLikedStore(
-    (state: LikedStore) => state,
-  );
-
-  const handleHeartClick = () => {
-    setIsHeartClicked(!isHeartClicked);
-    if (isHeartClicked) {
-      removeFromLiked(movie.id);
-    } else {
-      addToLiked(movie.id);
-    }
-  };
-
-  const handleNavigation = () => {
-    navigation.navigate('MovieDetailScreen', {id: movie.id});
-  };
-
-  useEffect(() => {
-    const movieIsLiked = likedMovies.includes(movie.id);
-    setIsHeartClicked(movieIsLiked);
-  }, [likedMovies, movie.id]);
-
-  return (
-    <TouchableWithoutFeedback
-      style={styles.container}
-      onPress={handleNavigation}>
-      <Image
-        source={{uri: 'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path}}
-        style={styles.image}
-      />
-      <View style={styles.contentContainer}>
-        <Text style={styles.title}>{movie.title}</Text>
-        <Text style={styles.subTitle}>
-          Anno:
-          {movie.release_date && new Date(movie.release_date).getFullYear()} |
-          Voto:
-          {movie.vote_average && parseFloat(movie.vote_average.toFixed(1))}
-        </Text>
-      </View>
-      <View style={styles.iconContainer}>
-        <Text>{'>'}</Text>
-      </View>
-    </TouchableWithoutFeedback>
-  );
-};
 
 export default MovieCard;

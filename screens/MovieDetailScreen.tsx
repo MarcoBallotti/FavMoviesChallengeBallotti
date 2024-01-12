@@ -25,6 +25,9 @@ const MovieDetail = () => {
   );
 
   const handleHeartClick = () => {
+    console.log('%c isHeartClicked', 'color:#FFB86C', isHeartClicked);
+    console.log('%c movie.id', 'color:#FFB86C', movie.id);
+    // console.log('%c likedMovies', 'color:#FFB86C', likedMovies);
     setIsHeartClicked(!isHeartClicked);
     if (isHeartClicked) {
       removeFromLiked(movie.id);
@@ -37,7 +40,6 @@ const MovieDetail = () => {
     getMovie();
     const movieIsLiked = likedMovies.includes(movie.id);
     setIsHeartClicked(movieIsLiked);
-    console.log('%c movieIsLiked', 'color:#FFB86C', movieIsLiked);
   }, [likedMovies, movie.id]);
 
   const getMovie = () => {
@@ -45,7 +47,6 @@ const MovieDetail = () => {
     axiosInstance
       .get('movie/' + id)
       .then(response => {
-        console.log('%c response', 'color:#FFB86C', response);
         setMovie(response.data);
         setLoading(false);
       })
@@ -54,8 +55,6 @@ const MovieDetail = () => {
         setLoading(false);
       });
   };
-
-  useEffect(() => {}, []);
 
   return (
     <View style={styles.container}>
@@ -82,7 +81,7 @@ const MovieDetail = () => {
           </View>
 
           <TouchableOpacity onPress={handleHeartClick}>
-            <Text>{isHeartClicked ? 'Like' : 'Unlike'}</Text>
+            <Text>{isHeartClicked ? 'Unlike' : 'Like'}</Text>
           </TouchableOpacity>
         </ScrollView>
       )}
