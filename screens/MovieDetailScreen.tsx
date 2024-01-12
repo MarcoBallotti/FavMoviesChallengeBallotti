@@ -27,7 +27,7 @@ const MovieDetail = () => {
   const handleHeartClick = () => {
     console.log('%c isHeartClicked', 'color:#FFB86C', isHeartClicked);
     console.log('%c movie.id', 'color:#FFB86C', movie.id);
-    // console.log('%c likedMovies', 'color:#FFB86C', likedMovies);
+
     setIsHeartClicked(!isHeartClicked);
     if (isHeartClicked) {
       removeFromLiked(movie.id);

@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'black',
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: '600',
     marginBottom: 5,
   },
