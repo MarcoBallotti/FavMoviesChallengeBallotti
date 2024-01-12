@@ -49,7 +49,6 @@ const HomeScreen: React.FC = () => {
         ...prevState,
         page: (baseSearch.page += 1),
       }));
-      console.log('%c baseSearch.page', 'color:#FFB86C', baseSearch.page);
       requestAPI();
     }
   };
