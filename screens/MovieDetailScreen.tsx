@@ -41,7 +41,7 @@ const MovieDetail = () => {
       headerRight: () => (
         <TouchableOpacity onPress={handleHeartClick} style={{marginRight: 10}}>
           <AntDesign
-            name={isHeartClicked ? 'heart' : 'hearto'}
+            name={movieIsLiked ? 'heart' : 'hearto'}
             size={30}
             color="#007aff"
           />
@@ -87,14 +87,6 @@ const MovieDetail = () => {
           <View style={styles.contentContainer}>
             <Text style={styles.description}>{movie.overview}</Text>
           </View>
-
-          <TouchableOpacity onPress={handleHeartClick}>
-            <AntDesign
-              name={isHeartClicked ? 'heart' : 'hearto'}
-              size={30}
-              color="red"
-            />
-          </TouchableOpacity>
         </ScrollView>
       )}
     </View>
