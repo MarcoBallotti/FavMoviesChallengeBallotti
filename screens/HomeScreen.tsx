@@ -1,15 +1,23 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList, TouchableOpacity, Text, View, StyleSheet} from 'react-native';
+import {
+  FlatList,
+  TouchableOpacity,
+  Text,
+  View,
+  StyleSheet,
+  Button,
+} from 'react-native';
 import {BaseSearch} from '../models/baseSearch';
 import {Movie} from '../models/movie';
 import {appendQueryParams} from '../utils/helpers';
 import axiosInstance from '../utils/axios';
 import MovieCard from '../components/movieCard';
+import {useLikedStore} from '../utils/zustand';
 
 const HomeScreen: React.FC = () => {
   const [baseSearch, setBaseSearch] = useState(new BaseSearch<Movie>());
   const endpoint = '/movie/top_rated';
-
+  const {clearStore} = useLikedStore();
   const [movieName, onChangeMovieName] = React.useState('');
   let onEndReachedCalledDuringMomentum: boolean;
 

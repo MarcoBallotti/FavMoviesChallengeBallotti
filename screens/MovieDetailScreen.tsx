@@ -6,49 +6,30 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import axiosInstance from '../utils/axios';
 import {Movie} from '../models/movie';
 import {ScrollView} from 'react-native-gesture-handler';
 import {LikedStore, useLikedStore} from '../utils/zustand';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {LikeButton} from '../components/likeButton';
 const MovieDetail = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const {id} = route.params as any;
-  const [movie, setMovie] = useState(new Movie());
+  const [movie, setMovie] = useState<Movie>();
   const [loading, setLoading] = useState(false);
-  const [isHeartClicked, setIsHeartClicked] = useState(false);
-  const {addToLiked, removeFromLiked, likedMovies} = useLikedStore(
-    (state: LikedStore) => state,
-  );
-
-  const handleHeartClick = () => {
-    setIsHeartClicked(!isHeartClicked);
-    if (isHeartClicked) {
-      removeFromLiked(movie.id);
-    } else {
-      addToLiked(movie.id);
-    }
-  };
 
   useEffect(() => {
-    getMovie();
-    const movieIsLiked = likedMovies.includes(movie.id);
-    setIsHeartClicked(movieIsLiked);
-    navigation.setOptions({
-      headerRight: () => (
-        <TouchableOpacity onPress={handleHeartClick} style={{marginRight: 10}}>
-          <AntDesign
-            name={movieIsLiked ? 'heart' : 'hearto'}
-            size={30}
-            color="#007aff"
-          />
-        </TouchableOpacity>
-      ),
-    });
-  }, [likedMovies, movie.id, navigation]);
+    if (movie) {
+      navigation.setOptions({
+        headerRight: () => <LikeButton movie={movie} />,
+      });
+    } else {
+      getMovie();
+    }
+  }, [movie]);
 
   const getMovie = () => {
     setLoading(true);
@@ -66,11 +47,7 @@ const MovieDetail = () => {
 
   return (
     <View style={styles.container}>
-      {loading ? (
-        <View style={styles.loading}>
-          <ActivityIndicator size="large" color={'red'} />
-        </View>
-      ) : (
+      {movie && (
         <ScrollView style={{height: '100%'}}>
           <View style={styles.relativeContainer}>
             <Image
