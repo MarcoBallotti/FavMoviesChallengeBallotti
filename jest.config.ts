@@ -35,7 +35,6 @@ const config: Config = {
 
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
-    './__tests__/globalMock.js',
     '\\.snap$',
     '<rootDir>/e2e/',
   ],
