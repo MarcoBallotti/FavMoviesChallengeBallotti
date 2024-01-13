@@ -6,7 +6,7 @@
     "allowSyntheticDefaultImports": true
     // ... your other options
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "setup-jest.ts"],
   "exclude": ["node_modules"],
   "extends": "@react-native/typescript-config/tsconfig.json"
 }

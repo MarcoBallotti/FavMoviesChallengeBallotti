@@ -1,4 +1,4 @@
-import {useLikedStore} from '../testable_store';
+import {useLikedStore} from '../zustand';
 
 describe('test 1', () => {
   test('should return length of film appended', () => {
